@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+  <Id>bd7fdcc2-4ed1-4839-9e35-4e03babe2d30</Id>
+  <Version>1.0.0.1</Version>
+  <ProviderName>Microsoft PFE</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Word Redaction AddIn"/>
+  <Description DefaultValue="A tool to help redact text from the document, but keep that redacted text safe so it can be restored, if needed."/>
+  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+  <SupportUrl DefaultValue="https://www.microsoft.com/help"/>
+  <AppDomains>
+    <AppDomain>microsoft.com</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Document"/>
+  </Hosts>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://localhost:3000/taskpane.html"/>
+  </DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
+    <Hosts>
+      <Host xsi:type="Document">
+        <MobileFormFactor>
+          <FunctionFile resid="Commands.Url" />
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <OfficeTab id="TabReviewWord">
+              <!--GROUP-->
+              <Group id="CommandsGroup">
+                <Label resid="CommandsGroup.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16"/>
+                  <bt:Image size="32" resid="Icon.32x32"/>
+                  <bt:Image size="80" resid="Icon.80x80"/>
+                </Icon>
+                <!--TASKPANE BUTTON-->
+                <Control xsi:type="Button" id="TaskpaneButton">
+                  <Label resid="TaskpaneButton.Label"/>
+                  <Supertip>
+                    <Title resid="TaskpaneButton.Label"/>
+                    <Description resid="TaskpaneButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16"/>
+                    <bt:Image size="32" resid="Icon.32x32"/>
+                    <bt:Image size="80" resid="Icon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ButtonId1</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+                <!--REDACTION BUTTON-->
+                <Control xsi:type="Button" id="RedactionButton">
+                  <Label resid="RedactionButton.Label"/>
+                  <Supertip>
+                    <Title resid="RedactionButton.Label"/>
+                    <Description resid="RedactionButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="RedactionIcon.16x16"/>
+                    <bt:Image size="32" resid="RedactionIcon.32x32"/>
+                    <bt:Image size="80" resid="RedactionIcon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>redactSelection</FunctionName>
+                  </Action>
+                </Control>
+                <!--UNREDACTION BUTTON-->
+                <Control xsi:type="Button" id="UnredactionButton">
+                  <Label resid="UnredactionButton.Label"/>
+                  <Supertip>
+                    <Title resid="UnredactionButton.Label"/>
+                    <Description resid="UnredactionButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="UnredactionIcon.16x16"/>
+                    <bt:Image size="32" resid="UnredactionIcon.32x32"/>
+                    <bt:Image size="80" resid="UnredactionIcon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>unredactSelection</FunctionName>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </MobileFormFactor>
+        <DesktopFormFactor>
+          <GetStarted>
+            <Title resid="GetStarted.Title"/>
+            <Description resid="GetStarted.Description"/>
+            <LearnMoreUrl resid="GetStarted.LearnMoreUrl"/>
+          </GetStarted>
+          <FunctionFile resid="Commands.Url"/>
+          <!--RIBBON-->
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <OfficeTab id="TabReviewWord">
+              <!--GROUP-->
+              <Group id="CommandsGroup">
+                <Label resid="CommandsGroup.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16"/>
+                  <bt:Image size="32" resid="Icon.32x32"/>
+                  <bt:Image size="80" resid="Icon.80x80"/>
+                </Icon>
+                <!--TASKPANE BUTTON-->
+                <Control xsi:type="Button" id="TaskpaneButton">
+                  <Label resid="TaskpaneButton.Label"/>
+                  <Supertip>
+                    <Title resid="TaskpaneButton.Label"/>
+                    <Description resid="TaskpaneButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16"/>
+                    <bt:Image size="32" resid="Icon.32x32"/>
+                    <bt:Image size="80" resid="Icon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ButtonId1</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+                <!--REDACTION BUTTON-->
+                <Control xsi:type="Button" id="RedactionButton">
+                  <Label resid="RedactionButton.Label"/>
+                  <Supertip>
+                    <Title resid="RedactionButton.Label"/>
+                    <Description resid="RedactionButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="RedactionIcon.16x16"/>
+                    <bt:Image size="32" resid="RedactionIcon.32x32"/>
+                    <bt:Image size="80" resid="RedactionIcon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>redactSelection</FunctionName>
+                  </Action>
+                </Control>
+                <!--UNREDACTION BUTTON-->
+                <Control xsi:type="Button" id="UnredactionButton">
+                  <Label resid="UnredactionButton.Label"/>
+                  <Supertip>
+                    <Title resid="UnredactionButton.Label"/>
+                    <Description resid="UnredactionButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="UnredactionIcon.16x16"/>
+                    <bt:Image size="32" resid="UnredactionIcon.32x32"/>
+                    <bt:Image size="80" resid="UnredactionIcon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>unredactSelection</FunctionName>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/mainicon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/mainicon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/mainicon-80.png"/>
+        <bt:Image id="RedactionIcon.16x16" DefaultValue="https://localhost:3000/assets/redactionicon-16.png"/>
+        <bt:Image id="RedactionIcon.32x32" DefaultValue="https://localhost:3000/assets/redactionicon-32.png"/>
+        <bt:Image id="RedactionIcon.80x80" DefaultValue="https://localhost:3000/assets/redactionicon-80.png"/>
+        <bt:Image id="UnredactionIcon.16x16" DefaultValue="https://localhost:3000/assets/unredactionicon-16.png"/>
+        <bt:Image id="UnredactionIcon.32x32" DefaultValue="https://localhost:3000/assets/unredactionicon-32.png"/>
+        <bt:Image id="UnredactionIcon.80x80" DefaultValue="https://localhost:3000/assets/unredactionicon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
+        <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with redacting portion of your document!"/>
+        <bt:String id="CommandsGroup.Label" DefaultValue="Redaction Group"/>
+        <bt:String id="ContextMenu.Label" DefaultValue="Redaction Taskpane"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Show Redaction Taskpane"/>
+        <bt:String id="RedactionButton.Label" DefaultValue="Redact Selected Text"/>
+        <bt:String id="UnredactionButton.Label" DefaultValue="Unredact Selected Text"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="GetStarted.Description" DefaultValue="The Word Redaction AddIn will help you make redactions to text, but keep them safe so they can be restored when needed."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show the Redaction Taskpane"/>
+        <bt:String id="RedactionButton.Tooltip" DefaultValue="Click to redact the selected text in your document."/>
+        <bt:String id="UnredactionButton.Tooltip" DefaultValue="Click to unredact the selected text in your document."/>
+        <bt:String id="ContextMenu.Tooltip" DefaultValue="Taskpane to view, redact or unredact the selected text ranges."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+  </VersionOverrides>
+</OfficeApp>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contoso Task Pane Add-in</title>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/beta/hosted/office.js"></script>
+    <script type="text/javascript">
+    (function() {
+        console.log("here");
+        Office.initialize = function (reason) {
+            console.log("office init - " + reason);
+            Office.onReady(function(info) {
+                console.log("office ready - " + info);
+                document.getElementById("yesButton").onclick = function () {
+                    console.log("Yes");
+                    Office.context.ui.messageParent(true);
+                }
+                document.getElementById("noButton").onclick = function () {
+                    Office.context.ui.messageParent(false);
+                }
+                document.getElementById("cancelButton").onclick = function () {
+                    Office.context.ui.messageParent(false);
+                }
+            });
+        };
+    })();
+    </script>   
+    <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css"/>
+
+    <!-- Template styles -->
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <img src="../../assets/info.png" style="position:absolute;left:10px;top:10px;width:32px;height:32px"/>
+    <div id="message" style="position:absolute;left:47px;top:0px;">
+        <p>This process will remove the ability to undo the redaction. 
+           Please be sure to save a copy of your document before finalizing.</p>
+        <p>Are you sure you want to continue?</p>
+    </div>
+    <div id="buttonPanel" style="position:absolute;bottom:10px;left:47px">
+        <button id="yesButton">Yes</button> &nbsp;&nbsp;
+        <button id="noButton">No</button> &nbsp;&nbsp;
+        <button id="cancelButton">Cancel</button> &nbsp;&nbsp;
+    </div>
+</body>
+</html>

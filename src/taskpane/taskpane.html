@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contoso Task Pane Add-in</title>
+
+    <!-- Office JavaScript API -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/beta/hosted/office.js"></script>
+    <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css"/>
+
+    <!-- Template styles -->
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="ms-font-m ms-welcome ms-Fabric">
+    <header id="header" class="ms-bgColor-neutralLighter" style="text-align: center;">
+        <img width="64" height="64" src="../../assets/logo-filled.png" alt="Word Redaction Add-In" title="Word Redaction Add-In" />
+    </header>
+    <section class="ms-bgColor-neutralLighter">
+        <div class="ms-font-m">
+            <table>
+                <tr>
+                    <td><b>Current document</b>:</td>
+                    <td id="documentName"></td>
+                </tr>
+                <tr>
+                    <td><b>Current redactions</b>:</td>
+                    <td id="redactionCount"></td>
+                </tr>
+                <tr id="warningRow">
+                    <td colspan="2"><br/><b>NOTE</b>: Because you are running in Word online, the redacted content 
+                                                controls created when you redact cannot be locked to prevent
+                                                edit or deletion.<br/></td>
+                </tr>
+                <tr><td><button id="hideHeader">Hide extra info...</button></td></tr>
+            </table>
+        </div>
+    </section>
+    <main id="app-body" class="ms-welcome__main" style="display: none;">
+        <section>
+            <div id="note1" class="ms-font-m">Select text in the document and click 'Redact' to redact the selection. Or select
+                                a redacted block and click 'Unredact' to restore it.</div>
+            <br/>
+            <table>
+                <tr>
+                    <td>
+                        <button role="button" id="redact" class="ms-Button ms-Button--hero ms-font-m">
+                            <span class="ms-Button-label">Redact</span>
+                        </button>
+                        &nbsp;&nbsp;
+                        <button role="button" id="unredact" class="ms-Button ms-Button--hero ms-font-m">
+                            <span class="ms-Button-label">Unredact</span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <br/>
+        <section>
+            <div id="note2" class="ms-font-m">Select a redacted block in the document and then click the 'Reveal' button.
+                                    When you are complete and ready to share the redactd document, click 'Finalize' to
+                                    lock in all your changes. <br/>
+                                    <b>NOTE</b>: This process cannot be undone.
+            </div>
+            <br/>
+            <table>
+                <tr>
+                    <td>
+                        <button role="button" id="reveal" class="ms-Button ms-Button--hero ms-font-m">
+                            <span class="ms-Button-label">Reveal</span>
+                        </button>
+                        &nbsp;&nbsp;
+                        <button role="button" id="clear" class="ms-Button ms-Button--hero ms-font-m">
+                            <span class="ms-Button-label">Clear</span>
+                        </button>
+                        &nbsp;&nbsp;            
+                        <button role="button" id="finalize" class="ms-Button ms-Button--hero ms-font-m">
+                            <span class="ms-Button-label">Finalize</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr id="legend">
+                    <td>
+                        <br/>
+                        Recoverable text: ░
+                        <br/>
+                        Fully redacted text: █ (unrecoverable)
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </main>
+    <div id="revealInfo">
+        <p>Revealed redaction:</p>
+        <p class="ms-font-m" style="margin-left: 5px; margin-right: 20px; text-align: left; border-style:dotted" id="redaction"></p>
+    </div>
+
+    <div style="position: absolute; bottom: 5px; left: 5px" id="logArea">
+        <p>Log:</p>
+        <textarea id="log" rows="8" cols="44" readonly style="resize:none"></textarea>
+    </div>
+
+    <div style="position: absolute; top:-20px; width:99%; left: 0px; height:22px;
+                background-color: yellow; border-style:solid; 
+                border-color:black; border-width: 1px;" id="notification">
+            <img src="../../assets/info.png" 
+                style="position:absolute;top:2px;left:2px;width:16px;height:16px">
+
+            <p id="notificationText"
+               style="position:absolute;top:-7px;left:22px;font-size:10px;"></p>
+    </div>
+</body>
+
+</html>
